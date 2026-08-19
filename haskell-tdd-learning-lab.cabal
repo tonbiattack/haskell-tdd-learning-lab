@@ -1,0 +1,34 @@
+cabal-version:      3.0
+name:               haskell-tdd-learning-lab
+version:            0.1.0.0
+synopsis:           TDDでHaskellの関数型設計を学ぶ実行可能教材
+description:        A small Haskell learning lab built around red-green-refactor.
+category:           Education
+build-type:         Simple
+
+common warnings
+  ghc-options: -Wall -Wcompat -Wincomplete-uni-patterns -Wincomplete-record-updates
+  default-language: Haskell2010
+
+library
+  import:             warnings
+  hs-source-dirs:     src
+  exposed-modules:    HaskellTdd.Fundamentals, HaskellTdd.MaybeUser, HaskellTdd.Validation, HaskellTdd.PureIO
+  build-depends:      base >=4.17 && <5
+
+executable haskell-tdd-learning-lab
+  import:             warnings
+  hs-source-dirs:     app
+  main-is:            Main.hs
+  build-depends:      base >=4.17 && <5, haskell-tdd-learning-lab
+
+test-suite haskell-tdd-learning-lab-test
+  import:             warnings
+  type:               exitcode-stdio-1.0
+  hs-source-dirs:     test
+  main-is:            Spec.hs
+  build-depends:      base >=4.17 && <5,
+                      hspec >=2.10 && <3,
+                      QuickCheck >=2.14 && <3,
+                      haskell-tdd-learning-lab
+  default-language:   Haskell2010
